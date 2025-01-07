@@ -31,7 +31,7 @@ const modify = (req, res) => {
 
 //destroy
 const destroy = (req, res) => {
-  res.send(`elimino un post con id:` + req.params.id)
+  // res.send(`elimino un post con id:` + req.params.id)
   const post = posts.find(post => post.id == req.params.id);
 
   posts.splice(posts.indexOf(post), 1);
@@ -45,7 +45,7 @@ const destroy = (req, res) => {
   //   })
   // }
 
-  // res.sendStatus(204)
+  res.sendStatus(204)
 };
 
 
