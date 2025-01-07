@@ -3,7 +3,12 @@ const posts = require('../data/posts');
 //index
 const index = (req, res) => {
   // res.send(`elenco dei posts`)
-  res.json(posts)
+  let listaPosts = posts
+  if (req.query.tags) {
+    let tag = req.query.tags;
+    listaPosts = posts.filter(post => post.tags.includes(tag))
+  }
+  res.json(listaPosts)
 };
 
 //show
