@@ -1,14 +1,17 @@
 const posts = require('../data/posts');
 
-
 //index
 const index = (req, res) => {
-  res.send(`elenco dei posts`)
+  // res.send(`elenco dei posts`)
+  res.json(posts)
 };
 
 //show
 const show = (req, res) => {
-  res.send(`mostro un post con id:` + req.params.id)
+  // res.send(`mostro un post con id:` + req.params.id)
+  const post = posts.find(post => post.id == req.params.id);
+
+  res.json(post)
 };
 
 //store
@@ -29,7 +32,23 @@ const modify = (req, res) => {
 //destroy
 const destroy = (req, res) => {
   res.send(`elimino un post con id:` + req.params.id)
+  const post = posts.find(post => post.id == req.params.id);
+
+  posts.splice(posts.indexOf(post), 1);
+  console.log(posts);
+  // if (!post) {
+  //   res.status(404)
+  //   return res.json({
+  //     message: 'post non trovato',
+  //     status: 404,
+  //     error: 'not found'
+  //   })
+  // }
+
+  // res.sendStatus(204)
 };
+
+
 
 module.exports = {
   index,

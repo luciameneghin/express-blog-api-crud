@@ -7,10 +7,9 @@ const postsRouter = require('./routers/postsRouters')
 
 app.get('/', (req, res) => {
   res.send('server posts')
-})
+});
 
 app.use('/posts', postsRouter)
-
 
 //porta in ascolto
 app.listen(port, () => {
