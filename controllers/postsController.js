@@ -16,6 +16,14 @@ const show = (req, res) => {
   // res.send(`mostro un post con id:` + req.params.id)
   const post = posts.find(post => post.id == req.params.id);
 
+  if (!post) {
+    res.status(404)
+    return res.json({
+      message: 'post non trovato',
+      status: 404,
+      error: 'not found'
+    })
+  }
   res.json(post)
 };
 
@@ -41,14 +49,14 @@ const destroy = (req, res) => {
 
   posts.splice(posts.indexOf(post), 1);
   console.log(posts);
-  // if (!post) {
-  //   res.status(404)
-  //   return res.json({
-  //     message: 'post non trovato',
-  //     status: 404,
-  //     error: 'not found'
-  //   })
-  // }
+  if (!post) {
+    res.status(404)
+    return res.json({
+      message: 'post non trovato',
+      status: 404,
+      error: 'not found'
+    })
+  }
 
   res.sendStatus(204)
 };
