@@ -47,7 +47,17 @@ const store = (req, res) => {
 
 //update
 const update = (req, res) => {
-  res.send(`modifico un post con id:` + req.params.id)
+  // res.send(`modifico un post con id:` + req.params.id)
+  console.log(req.body);
+  const id = parseInt(req.params.id);
+  const post = posts.find(post => post.id === id)
+  // console.log(post);
+
+  post.title = req.body.title
+  post.content = req.body.content
+  post.image = req.body.image
+  post.tags = req.body.tags
+  res.json(post)
 };
 
 //modify
