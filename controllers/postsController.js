@@ -2,6 +2,7 @@ const posts = require('../data/posts');
 
 //index
 const index = (req, res) => {
+  console.log(req.query);
   // res.send(`elenco dei posts`)
   let listaPosts = posts
   if (req.query.tags) {
@@ -29,7 +30,19 @@ const show = (req, res) => {
 
 //store
 const store = (req, res) => {
-  res.send(`aggiungo un nuovo post`)
+  // res.send(`aggiungo un nuovo post`)
+  console.log(req.body);
+  const id = posts.at(-1).id + 1;
+  //creo nuovo oggetto
+  const newPost = {
+    id,
+    ...req.body,
+  }
+  //pusho l'oggetto nell'array
+  posts.push(newPost)
+  console.log(posts);
+  res.status(201)
+  res.json(posts)
 };
 
 //update
@@ -45,7 +58,8 @@ const modify = (req, res) => {
 //destroy
 const destroy = (req, res) => {
   // res.send(`elimino un post con id:` + req.params.id)
-  const post = posts.find(post => post.id == req.params.id);
+  const id = parseInt(req.params.id)
+  const post = posts.find(post => post.id == id);
 
   posts.splice(posts.indexOf(post), 1);
   console.log(posts);
