@@ -4,6 +4,10 @@ const posts = require('../data/posts');
 const index = (req, res) => {
   console.log(req.query);
   // res.send(`elenco dei posts`)
+
+  // errorsHandlerFunction()
+
+  throw new Error('errore da controller in index')
   let listaPosts = posts
   if (req.query.tags) {
     let tag = req.query.tags;
@@ -72,7 +76,27 @@ const update = (req, res) => {
 
 //modify
 const modify = (req, res) => {
-  res.send(`modifico in parte un post con id:` + req.params.id)
+  // res.send(`modifico in parte un post con id:` + req.params.id)
+  console.log(req.body);
+  const id = parseInt(req.params.id);
+  const post = posts.find(post => post.id === id)
+  // console.log(post);
+
+  //gestione errore
+  if (!post) {
+    res.status(404);
+    return res.json({
+      message: 'post non trovato',
+      status: 404,
+      error: 'Not Found'
+    })
+  }
+  //
+  post.title = req.body.title
+  post.content = req.body.content
+  post.image = req.body.image
+  post.tags = req.body.tags
+  res.json(post)
 };
 
 //destroy

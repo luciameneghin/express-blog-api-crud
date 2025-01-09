@@ -2,6 +2,7 @@ const posts = require('./data/posts');
 const express = require('express');
 const postsRouter = require('./routers/postsRouters')
 const notFound = require('./middlewares/notFound')
+const errorsHandler = require('./middlewares/errorsHandler')
 const app = express();
 
 const port = 3000;
@@ -15,7 +16,11 @@ app.get('/', (req, res) => {
 
 app.use('/posts', postsRouter)
 
-app.use(notFound)
+//500
+app.use(errorsHandler);
+//404
+app.use(notFound);
+
 //porta in ascolto
 app.listen(port, () => {
   console.log(`porta in ascolto ${port}`);
