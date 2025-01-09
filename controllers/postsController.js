@@ -1,4 +1,5 @@
 const posts = require('../data/posts');
+const checkData = require('../middlewares/checkData');
 
 //index
 const index = (req, res) => {
@@ -7,7 +8,7 @@ const index = (req, res) => {
 
   // errorsHandlerFunction()
 
-  throw new Error('errore da controller in index')
+  // throw new Error('errore da controller in index')
   let listaPosts = posts
   if (req.query.tags) {
     let tag = req.query.tags;
@@ -19,6 +20,7 @@ const index = (req, res) => {
 //show
 const show = (req, res) => {
   // res.send(`mostro un post con id:` + req.params.id)
+  checkData()
   const post = posts.find(post => post.id == req.params.id);
 
   if (!post) {

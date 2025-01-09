@@ -1,8 +1,10 @@
 const posts = require('./data/posts');
 const express = require('express');
-const postsRouter = require('./routers/postsRouters')
-const notFound = require('./middlewares/notFound')
-const errorsHandler = require('./middlewares/errorsHandler')
+const postsRouter = require('./routers/postsRouters');
+const notFound = require('./middlewares/notFound');
+const errorsHandler = require('./middlewares/errorsHandler');
+const checkData = require('./middlewares/checkData');
+
 const app = express();
 
 const port = 3000;
@@ -15,6 +17,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/posts', postsRouter)
+
+//middleware del controllo dati inseriti in postsRouters.js
 
 //500
 app.use(errorsHandler);
